@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { CursorProvider } from "@/components/cursor/CursorProvider";
 import { CustomCursor } from "@/components/cursor/CustomCursor";
 import AmbientBackground from "@/components/cursor/AmbientBackground";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -47,6 +48,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               <AmbientBackground />
               {children}
               <CustomCursor />
+              <Analytics />
             </ModeProvider>
           </ThemeProvider>
         </CursorProvider>

@@ -1,5 +1,5 @@
 import { Command, TerminalLine } from "./types";
-import { IDENTITY, ENVIRONMENT_STATUS, ACTIVITY_STATUS, JOURNEY_MILESTONES, EXPERIENCES, SKILL_CATEGORIES, WRITEUPS, PROJECTS, CERTIFICATIONS, RESEARCH_AREAS, CV_PATH } from "./data";
+import { ENVIRONMENT_STATUS, ACTIVITY_STATUS, JOURNEY_MILESTONES, EXPERIENCES, SKILL_CATEGORIES, WRITEUPS, PROJECTS, CERTIFICATIONS, RESEARCH_AREAS, CV_PATH } from "./data";
 import { getTimestamp, generateId } from "./utils";
 
 function createLine(type: TerminalLine["type"], content: string): TerminalLine {

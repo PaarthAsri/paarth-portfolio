@@ -29,19 +29,23 @@ const BREACH_STATUS_MESSAGES = [
 ];
 
 function useTypewriter(text: string, speed: number = 50, startDelay: number = 0) {
-  const [displayed, setDisplayed] = useState("");
-  const [isComplete, setIsComplete] = useState(false);
+  const [displayed, setDisplayed] = useState(() => {
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return text;
+    }
+    return "";
+  });
+  const [isComplete, setIsComplete] = useState(() => {
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return true;
+    }
+    return false;
+  });
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setDisplayed(text);
-      setIsComplete(true);
-      return;
-    }
+    if (isComplete) return;
 
     let index = 0;
-    let timer: NodeJS.Timeout;
-
     const startTimer = setTimeout(() => {
       const interval = setInterval(() => {
         index++;
@@ -58,7 +62,7 @@ function useTypewriter(text: string, speed: number = 50, startDelay: number = 0)
     return () => {
       clearTimeout(startTimer);
     };
-  }, [text, speed, startDelay]);
+  }, [text, speed, startDelay, isComplete]);
 
   return { displayed, isComplete };
 }
@@ -84,10 +88,9 @@ function StatusMessages() {
   const messages = mode === "breach" ? BREACH_STATUS_MESSAGES : STATUS_MESSAGES;
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setIsVisible(true);
-      return;
-    }
+    const shouldSkip = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (shouldSkip) return;
 
     const cycle = () => {
       setIsVisible(false);
@@ -117,11 +120,16 @@ function StatusMessages() {
 function RoleRotation() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [phase, setPhase] = useState<"typing" | "holding" | "erasing">("typing");
-  const [displayed, setDisplayed] = useState("");
+
+  const [displayed, setDisplayed] = useState(() => {
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return ROLES[0];
+    }
+    return "";
+  });
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setDisplayed(ROLES[0]);
+    if (displayed === ROLES[0] && typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       return;
     }
 
@@ -156,7 +164,7 @@ function RoleRotation() {
     }
 
     return () => clearTimeout(timer);
-  }, [currentIndex, phase]);
+  }, [currentIndex, phase, displayed]);
 
   return (
     <div className="text-center mb-4 h-8">

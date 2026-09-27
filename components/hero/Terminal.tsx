@@ -9,13 +9,6 @@ import { generateId } from "@/lib/utils";
 // After mount, generateId() (Math.random-based) can be used safely.
 import TerminalOutput from "./TerminalOutput";
 
-let terminalLineCounter = 0;
-
-function nextTerminalId(): string {
-  terminalLineCounter += 1;
-  return `tl-${terminalLineCounter}`;
-}
-
 export default function Terminal() {
   const [lines, setLines] = useState<TerminalLine[]>([
     {
