@@ -93,7 +93,7 @@ function ExperienceCard({ exp }: { exp: Experience }) {
             {/* Column 1: Responsibilities / Main content */}
             <div>
               <p className="text-xs font-mono text-text-dim mb-3">
-                {exp.id === "exp1" ? "RESPONSIBILITIES" : "ADVERSARY SIMULATION"}
+                {exp.id === "exp1" ? "RESPONSIBILITIES" : exp.id === "exp2" ? "WEB DEVELOPMENT" : "ADVERSARY SIMULATION"}
               </p>
               <ul className="space-y-2">
                 {(exp.id === "exp1"
@@ -126,7 +126,7 @@ function ExperienceCard({ exp }: { exp: Experience }) {
             {/* Column 2: Technology / Additional info */}
             <div>
               <p className="text-xs font-mono text-text-dim mb-3">
-                {exp.id === "exp1" ? "TECHNOLOGY" : "INCIDENT SCENARIOS"}
+                {exp.id === "exp1" ? "TECHNOLOGY" : exp.id === "exp2" ? "DEVELOPMENT FOUNDATIONS" : "INCIDENT SCENARIOS"}
               </p>
               {exp.id === "exp1" ? (
                 <div className="flex flex-wrap gap-2">

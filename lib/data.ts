@@ -8,8 +8,9 @@ export const NAV_ITEMS: NavItem[] = [
   { label: "Experience", href: "#experience" },
   { label: "Research", href: "#research" },
   { label: "Write-ups", href: "#writeups" },
-  { label: "Contact", href: "#contact" },
   { label: "Projects", href: "#projects" },
+  { label: "Certifications", href: "#certifications" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export const CV_PATH = "/resume.pdf";
@@ -107,7 +108,7 @@ export const CAPABILITIES: Capability[] = [
     lifecycle: ["DISCOVER", "VALIDATE"],
     description:
       "Finding, validating, and understanding security weaknesses through bug bounty, vulnerability research, and security testing.",
-    related: ["Write-ups", "Research", "Labs"],
+    related: ["Write-ups", "Research"],
     icon: "search",
   },
   {
@@ -116,7 +117,7 @@ export const CAPABILITIES: Capability[] = [
     lifecycle: ["INVESTIGATE", "DETECT", "REMEDIATE"],
     description:
       "Investigating security events, analyzing threats, and working with detection and response workflows.",
-    related: ["SOC Lab", "Detection Engineering", "Research"],
+    related: ["Detection Engineering", "Research"],
     icon: "shield",
   },
   {
@@ -125,7 +126,7 @@ export const CAPABILITIES: Capability[] = [
     lifecycle: ["REMEDIATE", "VERIFY", "AUTOMATE"],
     description:
       "Building security tools, automating validation, and engineering remediation into practical systems.",
-    related: ["Projects", "Labs", "Automation"],
+    related: ["Projects", "Automation"],
     icon: "wrench",
   },
 ];
