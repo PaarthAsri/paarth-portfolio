@@ -164,7 +164,8 @@ function RoleRotation() {
     }
 
     return () => clearTimeout(timer);
-  }, [currentIndex, phase, displayed]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentIndex, phase]);
 
   return (
     <div className="text-center mb-4 h-8">
