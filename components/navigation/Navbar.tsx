@@ -19,17 +19,18 @@ export default function Navbar() {
         scrollRaf = null;
         setScrolled(window.scrollY > 50);
 
-        const sections = NAV_ITEMS.map((item) => item.href.slice(1));
-        for (let i = sections.length - 1; i >= 0; i--) {
-          const el = document.getElementById(sections[i]);
+        const sectionIds = ["hero", "about", "skills", "journey", "experience", "writeups", "projects", "certifications", "research", "contact"];
+        let current = sectionIds[0];
+        for (const id of sectionIds) {
+          const el = document.getElementById(id);
           if (el) {
             const rect = el.getBoundingClientRect();
             if (rect.top <= 100) {
-              setActiveSection(sections[i]);
-              break;
+              current = id;
             }
           }
         }
+        setActiveSection(current);
       });
     };
 
