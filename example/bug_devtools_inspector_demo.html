@@ -1,0 +1,106 @@
+<h2 class="sr-only">Interactive mockup: hovering a nav link or project row makes a line-art bug crawl to that element while a DevTools-style dashed outline with pixel dimensions appears around it.</h2>
+<style>
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+.pi-nav a{display:inline-block;color:#8a8a8a;font-size:13px;margin:0 6px;padding:6px 8px;cursor:pointer}
+.pi-nav a:hover{color:#ededed}
+.pi-row{display:flex;align-items:center;justify-content:space-between;height:62px;padding:0 14px;border-bottom:0.5px solid #232323;cursor:pointer;list-style:none;box-sizing:border-box}
+.pi-row:first-child{border-top:0.5px solid #232323}
+</style>
+<div id="fr" style="position:relative;border:0.5px solid var(--border-strong);border-radius:12px;overflow:hidden;background:#0a0a0a;color:#ededed;font-family:var(--font-sans)">
+  <div style="height:34px;background:#141414;display:flex;align-items:center;padding:0 12px;gap:6px;border-bottom:0.5px solid #232323">
+    <span style="width:9px;height:9px;border-radius:50%;background:#2a2a2a"></span>
+    <span style="width:9px;height:9px;border-radius:50%;background:#2a2a2a"></span>
+    <span style="width:9px;height:9px;border-radius:50%;background:#2a2a2a"></span>
+    <span style="margin-left:14px;flex:1;max-width:260px;height:20px;border-radius:4px;background:#0a0a0a;color:#6a6a6a;font-family:var(--font-mono);font-size:11px;display:flex;align-items:center;padding:0 8px">localhost:3000/work</span>
+  </div>
+  <div style="height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:0.5px solid #232323">
+    <span style="font-family:var(--font-mono);font-size:13px;font-weight:500;letter-spacing:0.5px">PAARTH://SEC</span>
+    <span class="pi-nav"><a data-tag="a.nav-link">Work</a><a data-tag="a.nav-link">Experience</a><a data-tag="a.nav-link">Writing</a><a data-tag="a.nav-link">Contact</a></span>
+    <span style="width:90px"></span>
+  </div>
+  <div style="height:300px;padding:24px;box-sizing:border-box;position:relative">
+    <div style="font-family:var(--font-mono);font-size:11px;color:#6a6a6a;margin-bottom:12px">work</div>
+    <ul style="margin:0;padding:0;width:330px">
+      <li class="pi-row" data-tag="li.project"><span><span style="display:block;font-size:16px;font-weight:500">JWT Security Auditor</span><span style="display:block;font-family:var(--font-mono);font-size:11px;color:#8a8a8a;margin-top:3px">application security</span></span><span style="color:#6a6a6a">↗</span></li>
+      <li class="pi-row" data-tag="li.project"><span><span style="display:block;font-size:16px;font-weight:500">Phishing email detector</span><span style="display:block;font-family:var(--font-mono);font-size:11px;color:#8a8a8a;margin-top:3px">machine learning</span></span><span style="color:#6a6a6a">↗</span></li>
+      <li class="pi-row" data-tag="li.project"><span><span style="display:block;font-size:16px;font-weight:500">SecureCI</span><span style="display:block;font-family:var(--font-mono);font-size:11px;color:#8a8a8a;margin-top:3px">in development</span></span><span style="color:#6a6a6a">↗</span></li>
+    </ul>
+    <span id="bc" style="position:absolute;top:24px;right:18px;font-family:var(--font-mono);font-size:11px;color:#6a6a6a">caught 0</span>
+    <span style="position:absolute;bottom:14px;right:18px;font-family:var(--font-mono);font-size:11px;color:#6a6a6a">hover anything. the bug inspects it.</span>
+  </div>
+  <div id="ov" style="position:absolute;left:0;top:0;width:0;height:0;border:1px dashed #22d3ee;background:rgba(34,211,238,0.08);pointer-events:none;opacity:0;transition:opacity 120ms"></div>
+  <div id="lb" style="position:absolute;left:0;top:0;background:#22d3ee;color:#0a0a0a;font-family:var(--font-mono);font-size:11px;padding:2px 6px;border-radius:3px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity 120ms"></div>
+  <span id="bt" style="position:absolute;left:0;top:0;font-family:var(--font-mono);font-size:11px;color:#22d3ee;white-space:nowrap;opacity:0;pointer-events:none"></span>
+  <svg width="100%" height="100%" style="position:absolute;inset:0;display:block;pointer-events:none" role="img" aria-label="Line-art bug mascot">
+    <g id="bug" transform="translate(500 200)">
+      <circle r="22" fill="transparent" style="pointer-events:all;cursor:pointer" id="bhit"/>
+      <g fill="none" stroke="#ededed" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+        <polyline class="leg" data-s="-1" data-y="-5" data-g="0"/>
+        <polyline class="leg" data-s="1" data-y="-5" data-g="3.14"/>
+        <polyline class="leg" data-s="-1" data-y="3" data-g="3.14"/>
+        <polyline class="leg" data-s="1" data-y="3" data-g="0"/>
+        <polyline class="leg" data-s="-1" data-y="11" data-g="0"/>
+        <polyline class="leg" data-s="1" data-y="11" data-g="3.14"/>
+        <ellipse cx="0" cy="4" rx="7" ry="11" fill="#0a0a0a"/>
+        <line x1="0" y1="-6" x2="0" y2="14"/>
+        <circle cx="0" cy="-10" r="4.5" fill="#0a0a0a"/>
+        <path class="ant" d="M-2 -13 Q-5 -20 -9 -24"/>
+        <path class="ant" d="M2 -13 Q5 -20 9 -24"/>
+      </g>
+    </g>
+  </svg>
+</div>
+<script>
+(function(){
+var fr=document.getElementById('fr'),bug=document.getElementById('bug'),ov=document.getElementById('ov'),lb=document.getElementById('lb'),tag=document.getElementById('bt'),cnt=document.getElementById('bc'),hit=document.getElementById('bhit');
+var legs=[].slice.call(bug.querySelectorAll('.leg')),ants=[].slice.call(bug.querySelectorAll('.ant'));
+var targets=[].slice.call(fr.querySelectorAll('[data-tag]'));
+var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var W=fr.clientWidth,H=fr.clientHeight,x=W*0.78,y=H*0.6,ang=-Math.PI/2,phase=0,caught=0,frozen=0,tagT=0,cur=null;
+var cx=null,cy=null,px=null,py=null,cs=0,wx=x,wy=y,wt=0;
+var labels=['dup: already reported','informative','n/a: out of scope','triaged','resolved: bounty awarded'];
+function rel(el){var a=el.getBoundingClientRect(),b=fr.getBoundingClientRect();return{l:a.left-b.left,t:a.top-b.top,w:a.width,h:a.height}}
+function turn(a,k){var d=a-ang;while(d>Math.PI)d-=2*Math.PI;while(d<-Math.PI)d+=2*Math.PI;ang+=d*k}
+targets.forEach(function(el){
+ el.addEventListener('mouseenter',function(){
+  cur=el;var r=rel(el);
+  ov.style.left=r.l+'px';ov.style.top=r.t+'px';ov.style.width=(r.w-2)+'px';ov.style.height=(r.h-2)+'px';ov.style.opacity=1;
+  lb.textContent=el.dataset.tag+'  '+Math.round(r.w)+' × '+Math.round(r.h);
+  lb.style.left=r.l+'px';lb.style.top=(r.t<70?r.t+r.h+3:r.t-20)+'px';lb.style.opacity=1;
+ });
+ el.addEventListener('mouseleave',function(){cur=null;ov.style.opacity=0;lb.style.opacity=0});
+});
+fr.addEventListener('pointermove',function(e){var r=fr.getBoundingClientRect();cx=e.clientX-r.left;cy=e.clientY-r.top;if(px!==null){cs=cs*0.6+Math.hypot(cx-px,cy-py)*0.4}px=cx;py=cy});
+fr.addEventListener('pointerleave',function(){cx=null;px=null;cs=0});
+hit.addEventListener('click',function(){caught++;cnt.textContent='caught '+caught;frozen=90;tag.textContent=labels[(caught-1)%labels.length];tag.style.left=Math.min(x+16,W-170)+'px';tag.style.top=Math.max(4,y-30)+'px';tag.style.opacity=1;tagT=90});
+function draw(sp,t){
+ legs.forEach(function(l){var s=+l.dataset.s,y0=+l.dataset.y,g=+l.dataset.g;var sw=sp>0?Math.sin(phase+g)*4:0;l.setAttribute('points',(s*6)+','+y0+' '+(s*11)+','+(y0-3)+' '+(s*15)+','+(y0+sw))});
+ ants.forEach(function(a,i){var r=Math.sin(t/(sp>0?120:350)+i*2)*(sp>0?5:9);a.setAttribute('transform','rotate('+r+' '+(i?2:-2)+' -13)')});
+ bug.setAttribute('transform','translate('+x+' '+y+') rotate('+(ang*180/Math.PI+90)+')');
+}
+function frame(t){
+ W=fr.clientWidth;H=fr.clientHeight;
+ var sp=0,tx=null,ty=null;
+ if(frozen>0){frozen--}
+ else if(cur){
+  var r=rel(cur);tx=r.l+r.w-8;ty=r.t-3;var d=Math.hypot(tx-x,ty-y);
+  if(d>4){sp=Math.min(2.8,d*0.08+0.7)}else{x=tx;y=ty;turn(Math.PI,0.12)}
+ }else if(cx!==null&&cx>W*0.58&&cy>90){
+  var dx=cx-x,dy=cy-y,dd=Math.hypot(dx,dy);
+  if(cs>9&&dd<150){tx=x-dx;ty=y-dy;sp=3}
+  else if(dd>70){tx=cx;ty=cy;sp=0.9}
+  else{turn(Math.atan2(dy,dx),0.1)}
+ }else{
+  wt--;if(wt<=0){wx=W*(0.62+Math.random()*0.3);wy=110+Math.random()*(H-170);wt=180+Math.random()*240}
+  if(Math.hypot(wx-x,wy-y)>6){tx=wx;ty=wy;sp=0.5}
+ }
+ if(sp>0){turn(Math.atan2(ty-y,tx-x),0.18);x+=Math.cos(ang)*sp;y+=Math.sin(ang)*sp}
+ x=Math.max(18,Math.min(W-18,x));y=Math.max(18,Math.min(H-18,y));
+ phase+=sp*0.35;cs*=0.92;
+ if(tagT>0){tagT--;if(tagT===0)tag.style.opacity=0}
+ draw(sp,t);
+ requestAnimationFrame(frame);
+}
+if(reduce){draw(0,0)}else{requestAnimationFrame(frame)}
+})();
+</script>

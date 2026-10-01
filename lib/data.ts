@@ -1,17 +1,4 @@
-import { NavItem, Capability, JourneyMilestone, Experience, SkillCategory, Writeup, Project, Certification, ResearchArea } from "./types";
-
-export const NAV_ITEMS: NavItem[] = [
-  { label: "Home", href: "#hero" },
-  { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
-  { label: "Journey", href: "#journey" },
-  { label: "Experience", href: "#experience" },
-  { label: "Research", href: "#research" },
-  { label: "Write-ups", href: "#writeups" },
-  { label: "Projects", href: "#projects" },
-  { label: "Certifications", href: "#certifications" },
-  { label: "Contact", href: "#contact" },
-];
+import { Capability, JourneyMilestone, Experience, SkillCategory, Writeup, Project, Certification, ResearchArea } from "./types";
 
 export const CV_PATH = "/resume.pdf";
 
@@ -70,31 +57,17 @@ export const RESEARCH_AREAS: ResearchArea[] = [
   },
 ];
 
-export const IDENTITY = {
-  name: "Paarth Asri",
-  role: "Cybersecurity | Security Engineering | Application Security",
-  tagline: "Security Research / Security Operations / Security Engineering",
-  location: "India",
-  status: "Available for Opportunities",
-};
-
 export const ABOUT_STATEMENT =
-  "I approach cybersecurity as an engineering discipline — understanding how systems fail, how those failures are detected, and how they can be validated and improved.";
+  "I approach cybersecurity as an engineering discipline: understanding how systems fail, how those failures are detected, and how they can be validated and improved.";
 
 export const ABOUT_INTRO =
   "I am a cybersecurity-focused professional working as a System Associate at Infosys, combining enterprise application testing and automation with a growing focus on application security, security research, and security engineering.";
-
-export const ABOUT_IDENTITY = {
-  role: "Cybersecurity Professional",
-  focus: ["Security Engineering", "Application Security", "Security Research"],
-  status: "ACTIVE",
-};
 
 export const CURRENT_ROLE = {
   role: "System Associate",
   organization: "Infosys",
   location: "Bangalore, India",
-  period: "2025 — Present",
+  period: "Jul 2025 - Present",
   focus:
     "Enterprise application testing, automation, and security-focused validation across web applications and APIs.",
   detail:
@@ -129,16 +102,6 @@ export const CAPABILITIES: Capability[] = [
     related: ["Projects", "Automation"],
     icon: "wrench",
   },
-];
-
-export const LIFECYCLE_STAGES = [
-  "DISCOVER",
-  "VALIDATE",
-  "INVESTIGATE",
-  "DETECT",
-  "REMEDIATE",
-  "VERIFY",
-  "AUTOMATE",
 ];
 
 export const SKILL_CATEGORIES: SkillCategory[] = [
@@ -292,7 +255,7 @@ export const PROJECTS: Project[] = [
   {
     id: "p4",
     number: "04",
-    title: "BeEF Browser Exploitation — Ethical Security Demonstration",
+    title: "BeEF Browser Exploitation: Ethical Security Demo",
     category: "Security Research",
     status: "COMPLETED",
     description:
@@ -316,7 +279,7 @@ export const PROJECTS: Project[] = [
   {
     id: "p5",
     number: "05",
-    title: "Keylogger — Security Research / Controlled Demonstration",
+    title: "Keylogger: Controlled Security Research Demo",
     category: "Security Research",
     status: "COMPLETED",
     description:
@@ -360,6 +323,11 @@ export const WRITEUPS: Writeup[] = [
     status: "PUBLISHED",
     url: "https://github.com/PaarthAsri/search-permission-writeup",
     visualization: "authorization",
+    tldr: [
+      "global search checked task-level permissions",
+      "records required record-level permissions",
+      "→ private record data exposed through search results",
+    ],
   },
 ];
 
@@ -462,7 +430,7 @@ export const EXPERIENCES: Experience[] = [
     organization: "Infosys",
     role: "System Associate",
     location: "Bangalore, India",
-    period: "2025 — Present",
+    period: "Jul 2025 - Present",
     summary: "Enterprise SAP environment · Automation Testing",
     responsibilities: [
       "Enterprise application testing",
@@ -532,7 +500,7 @@ export const EXPERIENCES: Experience[] = [
     organization: "DigiSuraksha Parhari Foundation",
     role: "Cybersecurity Intern",
     location: "Delhi, India",
-    period: "Apr 2025 — May 2025",
+    period: "Apr 2025 - May 2025",
     summary: "Adversary Simulation · Security Monitoring",
     isSimulated: true,
     responsibilities: [
@@ -584,14 +552,14 @@ export const EXPERIENCES: Experience[] = [
       },
     ],
     lessons:
-      "This experience provided practical exposure to both sides of security — understanding how attacks are executed and how they can be detected. The simulated lab environment allowed safe exploration of adversary techniques and defensive analysis.",
+      "This experience provided practical exposure to both sides of security, understanding how attacks are executed and how they can be detected. The simulated lab environment allowed safe exploration of adversary techniques and defensive analysis.",
   },
   {
     id: "exp3",
     organization: "IBM",
     role: "Frontend Web Development Intern",
     location: "Delhi, India",
-    period: "Jul 2024 — Aug 2024",
+    period: "Jul 2024 - Aug 2024",
     summary: "Frontend Web Development · IBM SkillsBuild",
     responsibilities: [
       "Successfully completed the IBM SkillsBuild Internship Program",
@@ -637,72 +605,95 @@ export const EXPERIENCES: Experience[] = [
   },
 ];
 
-export const SYSTEM_STATUS = {
-  normal: {
-    systemStatus: "OPERATIONAL",
-    threatLevel: "LOW",
-    network: "STABLE",
-    mode: "NORMAL",
-  },
-  breach: {
-    systemStatus: "SIMULATED INCIDENT",
-    threatLevel: "CRITICAL",
-    network: "DEGRADED",
-    mode: "INCIDENT",
-  },
+export const SITE = {
+  name: "Paarth Asri",
+  initials: "PA",
+  role: "Security Engineer / Researcher",
+  tagline: "I build, test and break things to understand how they work.",
+  location: "Bangalore, India",
+  timezone: "Asia/Kolkata",
+  email: "paarthasri96@gmail.com",
+  github: "https://github.com/PaarthAsri",
+  githubUser: "PaarthAsri",
+  linkedin: "https://www.linkedin.com/in/paarth-asri",
+  x: "https://x.com/paarth_asri",
+  handle: "@PaarthAsri",
+  company: "System Associate @ Infosys",
+  availability: "Ready to get hired",
+  status: "hunting bugs",
+  // Drop a photo at this path; initials show until then.
+  avatar: "/assets/dp.jpeg",
 };
 
-export const ENVIRONMENT_STATUS = {
-  normal: {
-    environment: "PORTFOLIO SANDBOX",
-    posture: "OPERATIONAL",
-    monitoring: "ACTIVE",
-    terminal: "READY",
-    modules: "9 COMMANDS LOADED",
-  },
-  breach: {
-    environment: "PORTFOLIO SANDBOX",
-    posture: "SIMULATED INCIDENT",
-    monitoring: "ACTIVE",
-    terminal: "READY",
-    modules: "9 COMMANDS LOADED",
-  },
+export const PROFILE_TABS = [
+  { id: "overview", label: "Overview" },
+  { id: "projects", label: "Projects" },
+  { id: "experience", label: "Experience" },
+  { id: "bounty", label: "Bug Bounty" },
+  { id: "writeups", label: "Write-ups" },
+] as const;
+
+export type ProfileTab = (typeof PROFILE_TABS)[number]["id"];
+
+export const BUG_BOUNTY = {
+  since: "2025",
+  paid: "10+",
+  disclosures: "50+",
+  researching: "Smart contract and blockchain-based vulnerabilities",
+  summary: "SSRF · path traversal · logic flaws · subdomain takeover",
+  // Program names and targets are kept generic on purpose.
+  findings: [
+    {
+      id: "f1",
+      vuln: "SSRF via Host header manipulation",
+      severity: "critical",
+      cwe: "CWE-918",
+      target: "Cloud platform · Kubernetes ingress",
+      detail:
+        "The Host header was trusted when routing requests, so requests could be steered to internal Kubernetes services.",
+      impact: "Internal service mapping and server-side requests into the cluster network.",
+    },
+    {
+      id: "f2",
+      vuln: "Withdrawal forwarding logic flaw",
+      cwe: "CWE-840",
+      target: "Cross-chain reserve contract · withdrawals",
+      detail:
+        "Withdrawal forwarding did not bind the forwarded assets to the token and amount in the attestation.",
+      impact: "A valid attestation for one token could forward unrelated token balances held by the reserve.",
+    },
+    {
+      id: "f3",
+      vuln: "Consensus transition validation flaw",
+      cwe: "CWE-20",
+      target: "Blockchain client · IBFT/QBFT consensus",
+      detail:
+        "Timestamp validation for a consensus transition block used the parent block's config instead of the transition's own.",
+      impact: "A scheduled block-period change could be bypassed, or valid blocks rejected at the transition height.",
+    },
+    {
+      id: "f4",
+      vuln: "Authenticated path traversal (file write)",
+      cwe: "CWE-22",
+      target: "Enterprise workflow platform · licence upload",
+      detail: "The licence upload handler used the uploaded .lic filename without sanitizing it.",
+      impact: "An authenticated user could write files outside the intended directory.",
+    },
+    {
+      id: "f5",
+      vuln: "Arbitrary file deletion via RPC",
+      cwe: "CWE-73",
+      target: "Blockchain farming node · RPC API",
+      detail: "An RPC method for deleting plot files accepted an attacker-controlled path.",
+      impact: "Arbitrary file deletion on the node host.",
+    },
+    {
+      id: "f6",
+      vuln: "Subdomain takeover",
+      cwe: "CWE-284",
+      target: "Fintech platform · marketing subdomain",
+      detail: "A subdomain still pointed at unclaimed third-party landing-page infrastructure.",
+      impact: "The subdomain could be claimed to serve attacker content under the company's domain.",
+    },
+  ],
 };
-
-export const ACTIVITY_STATUS = {
-  navigation: "ACTIVE",
-  eventStream: "ACTIVE",
-  interaction: "READY",
-  incidentEngine: "SIMULATED",
-};
-
-export const BOOT_SEQUENCE = [
-  { label: "Loading interface", delay: 200 },
-  { label: "Initializing security modules", delay: 300 },
-  { label: "Loading terminal", delay: 250 },
-  { label: "Loading identity", delay: 200 },
-  { label: "Establishing interface", delay: 300 },
-  { label: "SYSTEM READY", delay: 100 },
-];
-
-export const LOG_TEMPLATES_NORMAL = [
-  { level: "INFO" as const, message: "Interface initialized — all modules loaded" },
-  { level: "INFO" as const, message: "Terminal session established — ready for input" },
-  { level: "DEBUG" as const, message: "Scroll-spy attached — navigation tracking active" },
-  { level: "INFO" as const, message: "Mode controller synced — NORMAL state confirmed" },
-  { level: "DEBUG" as const, message: "Accessibility checks passed — ARIA live regions active" },
-  { level: "INFO" as const, message: "Event stream connected — log feed active" },
-  { level: "DEBUG" as const, message: "Reduced-motion preference detected — animations minimized" },
-  { level: "INFO" as const, message: "Security surface monitor — posture nominal" },
-];
-
-export const LOG_TEMPLATES_BREACH = [
-  { level: "ERROR" as const, message: "INCIDENT: Simulated breach mode activated" },
-  { level: "WARN" as const, message: "ALERT: Threat level elevated — CRITICAL" },
-  { level: "ERROR" as const, message: "ALERT: Network degradation detected — DEGRADED" },
-  { level: "WARN" as const, message: "Incident engine engaged — simulation only" },
-  { level: "ERROR" as const, message: "ALERT: Perimeter anomaly — investigating" },
-  { level: "WARN" as const, message: "Containment protocols on standby" },
-  { level: "ERROR" as const, message: "ALERT: Lateral movement detected — simulated" },
-  { level: "WARN" as const, message: "Incident timeline recording — all events logged" },
-];

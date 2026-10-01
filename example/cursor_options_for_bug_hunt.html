@@ -1,0 +1,110 @@
+<h2 class="sr-only">Interactive comparison of four custom cursor designs for hunting the bug mascot: scope, magnifying lens, fly swatter, and HTTP verb tag.</h2>
+<style>
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+.co-btn.on{background:var(--surface-1);border-color:var(--border-stronger)}
+</style>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px">
+  <button class="co-btn on" data-o="scope">Scope</button>
+  <button class="co-btn" data-o="lens">Lens</button>
+  <button class="co-btn" data-o="swat">Swatter</button>
+  <button class="co-btn" data-o="verb">HTTP verb</button>
+</div>
+<div id="pn" style="position:relative;height:280px;background:#0a0a0a;border:0.5px solid var(--border-strong);border-radius:12px;overflow:hidden;cursor:none;touch-action:none">
+  <span id="cn" style="position:absolute;top:12px;right:14px;font-family:var(--font-mono);font-size:11px;color:#6a6a6a">caught 0</span>
+  <span style="position:absolute;bottom:12px;left:14px;font-family:var(--font-mono);font-size:11px;color:#6a6a6a">pick a cursor above, then hunt the bug. move slowly.</span>
+  <span id="tg" style="position:absolute;left:0;top:0;font-family:var(--font-mono);font-size:11px;color:#22d3ee;white-space:nowrap;opacity:0;pointer-events:none"></span>
+  <svg width="100%" height="100%" style="position:absolute;inset:0;display:block" role="img" aria-label="Bug mascot and custom cursor">
+    <g id="bug" transform="translate(340 140)">
+      <circle r="26" fill="transparent" id="bh" style="pointer-events:all"/>
+      <g fill="none" stroke="#ededed" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none">
+        <polyline class="leg" data-s="-1" data-y="-5" data-g="0"/><polyline class="leg" data-s="1" data-y="-5" data-g="3.14"/>
+        <polyline class="leg" data-s="-1" data-y="3" data-g="3.14"/><polyline class="leg" data-s="1" data-y="3" data-g="0"/>
+        <polyline class="leg" data-s="-1" data-y="11" data-g="0"/><polyline class="leg" data-s="1" data-y="11" data-g="3.14"/>
+        <ellipse cx="0" cy="4" rx="7" ry="11" fill="#0a0a0a"/><line x1="0" y1="-6" x2="0" y2="14"/>
+        <circle cx="0" cy="-10" r="4.5" fill="#0a0a0a"/>
+        <path class="ant" d="M-2 -13 Q-5 -20 -9 -24"/><path class="ant" d="M2 -13 Q5 -20 9 -24"/>
+      </g>
+    </g>
+    <g id="cur" style="pointer-events:none" transform="translate(-100 -100)">
+      <g id="c-scope" fill="none" stroke="#ededed" stroke-width="1.2" stroke-linecap="round">
+        <circle id="sr" r="14"/>
+        <line x1="-20" y1="0" x2="-8" y2="0"/><line x1="8" y1="0" x2="20" y2="0"/>
+        <line x1="0" y1="-20" x2="0" y2="-8"/><line x1="0" y1="8" x2="0" y2="20"/>
+        <circle r="1.5" fill="#ededed" stroke="none"/>
+      </g>
+      <g id="c-lens" fill="none" stroke="#ededed" stroke-width="1.5" stroke-linecap="round">
+        <circle id="lr" r="13"/><line x1="9.5" y1="9.5" x2="24" y2="24" stroke-width="2.5"/>
+        <path d="M-7 -4 A8 8 0 0 1 -2 -8" stroke-width="1"/>
+      </g>
+      <g transform="translate(0 13)"><g id="c-swat" fill="none" stroke="#ededed" stroke-width="1.3" stroke-linecap="round" style="transition:transform 90ms;transform-origin:0 0">
+        <g transform="rotate(25 0 0)">
+          <rect id="wr" x="-11" y="-26" width="22" height="24" rx="5"/>
+          <line x1="-11" y1="-20" x2="11" y2="-20" stroke-width="0.7"/><line x1="-11" y1="-14" x2="11" y2="-14" stroke-width="0.7"/><line x1="-11" y1="-8" x2="11" y2="-8" stroke-width="0.7"/>
+          <line x1="-5" y1="-26" x2="-5" y2="-2" stroke-width="0.7"/><line x1="0" y1="-26" x2="0" y2="-2" stroke-width="0.7"/><line x1="5" y1="-26" x2="5" y2="-2" stroke-width="0.7"/>
+          <line x1="0" y1="-2" x2="0" y2="22" stroke-width="3"/>
+        </g></g></g>
+      <g id="c-verb"><path d="M0 0 L0 16 L4.2 12.2 L7.2 18.6 L9.8 17.4 L6.9 11.2 L12.4 11.2 Z" fill="#ededed" stroke="#0a0a0a" stroke-width="0.8"/></g>
+      <text id="cl" x="22" y="6" font-family="var(--font-mono)" font-size="11" fill="#22d3ee"></text>
+    </g>
+  </svg>
+</div>
+<script>
+(function(){
+var pn=document.getElementById('pn'),bug=document.getElementById('bug'),cur=document.getElementById('cur'),cl=document.getElementById('cl'),tg=document.getElementById('tg'),cn=document.getElementById('cn'),bh=document.getElementById('bh');
+var legs=[].slice.call(bug.querySelectorAll('.leg')),ants=[].slice.call(bug.querySelectorAll('.ant'));
+var G={scope:document.getElementById('c-scope'),lens:document.getElementById('c-lens'),swat:document.getElementById('c-swat').parentNode,verb:document.getElementById('c-verb')};
+var sr=document.getElementById('sr'),lr=document.getElementById('lr'),wr=document.getElementById('wr'),sw=document.getElementById('c-swat');
+var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var opt='scope',W=pn.clientWidth,H=pn.clientHeight,x=W*0.6,y=H*0.5,ang=-Math.PI/2,phase=0,caught=0,frozen=0,tagT=0;
+var cx=null,cy=null,px=null,py=null,cs=0,wx=x,wy=y,wt=0,near=false,over=false;
+var labels=['dup: already reported','informative','n/a: out of scope','triaged','resolved: bounty awarded'];
+function show(){for(var k in G){G[k].style.display=(k===opt)?'':'none'}
+ [].slice.call(document.querySelectorAll('.co-btn')).forEach(function(b){b.classList.toggle('on',b.dataset.o===opt)});
+ style()}
+function style(){
+ var c=near?'#22d3ee':'#ededed';
+ sr.setAttribute('r',near?10:14);sr.setAttribute('stroke',c);lr.setAttribute('stroke',c);wr.setAttribute('stroke',c);
+ var t='';
+ if(opt==='scope'){cl.setAttribute('x',24);cl.setAttribute('y',4);t=near?'target acquired':''}
+ if(opt==='lens'){cl.setAttribute('x',30);cl.setAttribute('y',34);t=near?'anomaly detected':''}
+ if(opt==='swat'){t=''}
+ if(opt==='verb'){cl.setAttribute('x',16);cl.setAttribute('y',30);t=over?'DELETE /bug':(near?'POST /catch':'GET /bug')}
+ cl.textContent=t;
+}
+[].slice.call(document.querySelectorAll('.co-btn')).forEach(function(b){b.addEventListener('click',function(){opt=b.dataset.o;show()})});
+function turn(a,k){var d=a-ang;while(d>Math.PI)d-=2*Math.PI;while(d<-Math.PI)d+=2*Math.PI;ang+=d*k}
+pn.addEventListener('pointermove',function(e){var r=pn.getBoundingClientRect();cx=e.clientX-r.left;cy=e.clientY-r.top;if(px!==null){cs=cs*0.6+Math.hypot(cx-px,cy-py)*0.4}px=cx;py=cy;cur.setAttribute('transform','translate('+cx+' '+cy+')')});
+pn.addEventListener('pointerleave',function(){cx=null;px=null;cs=0;cur.setAttribute('transform','translate(-100 -100)')});
+pn.addEventListener('pointerdown',function(){if(opt==='swat'){sw.style.transform='rotate(-22deg) scale(0.88)';setTimeout(function(){sw.style.transform=''},110)}});
+bh.addEventListener('click',function(){caught++;cn.textContent='caught '+caught;frozen=90;tg.textContent=labels[(caught-1)%labels.length];tg.style.left=Math.min(x+18,W-170)+'px';tg.style.top=Math.max(4,y-32)+'px';tg.style.opacity=1;tagT=90});
+function draw(sp,t){
+ legs.forEach(function(l){var s=+l.dataset.s,y0=+l.dataset.y,g=+l.dataset.g;var sv=sp>0?Math.sin(phase+g)*4:0;l.setAttribute('points',(s*6)+','+y0+' '+(s*11)+','+(y0-3)+' '+(s*15)+','+(y0+sv))});
+ ants.forEach(function(a,i){var r=Math.sin(t/(sp>0?120:350)+i*2)*(sp>0?5:9);a.setAttribute('transform','rotate('+r+' '+(i?2:-2)+' -13)')});
+ bug.setAttribute('transform','translate('+x+' '+y+') rotate('+(ang*180/Math.PI+90)+')');
+}
+function frame(t){
+ W=pn.clientWidth;H=pn.clientHeight;
+ var sp=0,tx=null,ty=null,n=false,o=false;
+ if(cx!==null){var dd=Math.hypot(cx-x,cy-y);n=dd<70;o=dd<26}
+ if(n!==near||o!==over){near=n;over=o;style()}
+ if(frozen>0){frozen--}
+ else if(cx!==null){
+  var dx=cx-x,dy=cy-y,d=Math.hypot(dx,dy);
+  if(cs>9&&d<160){tx=x-dx;ty=y-dy;sp=3}
+  else if(d>70){tx=cx;ty=cy;sp=0.9}
+  else{turn(Math.atan2(dy,dx),0.1)}
+ }else{
+  wt--;if(wt<=0){wx=W*(0.15+Math.random()*0.7);wy=H*(0.2+Math.random()*0.55);wt=180+Math.random()*240}
+  if(Math.hypot(wx-x,wy-y)>6){tx=wx;ty=wy;sp=0.5}
+ }
+ if(sp>0){turn(Math.atan2(ty-y,tx-x),0.16);x+=Math.cos(ang)*sp;y+=Math.sin(ang)*sp}
+ x=Math.max(26,Math.min(W-26,x));y=Math.max(30,Math.min(H-34,y));
+ phase+=sp*0.35;cs*=0.92;
+ if(tagT>0){tagT--;if(tagT===0)tg.style.opacity=0}
+ draw(sp,t);
+ requestAnimationFrame(frame);
+}
+show();
+if(reduce){draw(0,0)}else{requestAnimationFrame(frame)}
+})();
+</script>

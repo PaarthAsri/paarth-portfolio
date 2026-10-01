@@ -1,34 +1,3 @@
-export type Mode = "normal" | "breach";
-
-export interface TerminalLine {
-  id: string;
-  type: "input" | "output" | "error" | "success" | "info" | "system";
-  content: string;
-}
-
-export interface Command {
-  name: string;
-  description: string;
-  usage?: string;
-  execute: (args: string[]) => CommandResult;
-}
-
-export interface CommandResult {
-  lines: TerminalLine[];
-  navigate?: string;
-}
-
-export interface NavItem {
-  label: string;
-  href: string;
-}
-
-export interface LogEntry {
-  timestamp: string;
-  level: "INFO" | "WARN" | "ERROR" | "DEBUG";
-  message: string;
-}
-
 export interface Capability {
   id: string;
   title: string;
@@ -94,6 +63,8 @@ export interface Writeup {
   status: string;
   url: string;
   visualization: "authorization" | "pipeline";
+  /** Short terminal-style summary; the last line is shown as the impact. */
+  tldr?: string[];
 }
 
 export interface Project {
@@ -118,6 +89,7 @@ export interface Certification {
   fullName: string;
   category: string;
   verificationUrl?: string;
+  status?: string;
 }
 
 export interface ResearchArea {

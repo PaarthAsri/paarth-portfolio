@@ -1,15 +1,11 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, JetBrains_Mono, IBM_Plex_Sans } from "next/font/google";
-import { ModeProvider } from "@/components/providers/ModeProvider";
-import { ThemeProvider } from "@/components/providers/ThemeProvider";
-import { CursorProvider } from "@/components/cursor/CursorProvider";
-import { CustomCursor } from "@/components/cursor/CustomCursor";
-import AmbientBackground from "@/components/cursor/AmbientBackground";
+import { Geist, Geist_Pixel, JetBrains_Mono } from "next/font/google";
+import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const geist = Geist({
+  variable: "--font-geist",
   subsets: ["latin"],
   display: "swap",
 });
@@ -20,38 +16,32 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const ibmPlexSans = IBM_Plex_Sans({
-  variable: "--font-ibm-plex-sans",
+const geistPixel = Geist_Pixel({
+  variable: "--font-geist-pixel",
   subsets: ["latin"],
   display: "swap",
-  weight: ["300", "400", "500", "600"],
 });
 
 export const metadata: Metadata = {
-  title: "PAARTH://SEC — Interactive Cybersecurity Portfolio",
+  title: "Paarth Asri · Security Engineer & Bug Bounty Hunter",
   description:
-    "Interactive cybersecurity portfolio demonstrating security research, application security, security operations, and security engineering capabilities.",
+    "Personal portfolio of Paarth Asri, a security engineer and researcher focused on application security, security research, and security engineering.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} ${ibmPlexSans.variable} h-full antialiased`}
-      data-mode="normal"
-      data-theme="cyber"
+      data-theme="dark"
+      suppressHydrationWarning
+      className={`${geist.variable} ${jetbrainsMono.variable} ${geistPixel.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-void text-text-primary cursor-none">
-        <CursorProvider>
-          <ThemeProvider>
-            <ModeProvider>
-              <AmbientBackground />
-              {children}
-              <CustomCursor />
-              <Analytics />
-            </ModeProvider>
-          </ThemeProvider>
-        </CursorProvider>
+      <body className="min-h-full flex flex-col bg-bg text-text-primary">
+        <Script id="theme-init" strategy="beforeInteractive">
+          {`try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}`}
+        </Script>
+        {children}
+        <Analytics />
       </body>
     </html>
   );

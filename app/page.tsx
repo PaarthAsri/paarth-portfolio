@@ -1,40 +1,29 @@
-"use client";
+import { existsSync } from "node:fs";
+import path from "node:path";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import Profile from "@/components/profile/Profile";
+import CommandPalette from "@/components/home/CommandPalette";
+import BugHunter from "@/components/bug-hunter/BugHunter";
+import BreakEffect from "@/components/break/BreakEffect";
+import { SITE } from "@/lib/data";
 
-import { useState } from "react";
-import LoadingSequence from "@/components/loading/LoadingSequence";
-import Navbar from "@/components/navigation/Navbar";
-import StatusBar from "@/components/navigation/StatusBar";
-import Hero from "@/components/hero/Hero";
-import About from "@/components/about/About";
-import Skills from "@/components/skills/Skills";
-import Journey from "@/components/journey/Journey";
-import Experience from "@/components/experience/Experience";
-import Writeups from "@/components/writeups/Writeups";
-import Projects from "@/components/projects/Projects";
-import Certifications from "@/components/certifications/Certifications";
-import Research from "@/components/research/Research";
-import Contact from "@/components/contact/Contact";
+const inPublic = (p: string) => existsSync(path.join(process.cwd(), "public", p));
 
 export default function Home() {
-  const [loading, setLoading] = useState(true);
-
   return (
     <>
-      {loading && <LoadingSequence onComplete={() => setLoading(false)} />}
-      <Navbar />
-      <main className="flex-1 pb-12">
-        <Hero />
-        <About />
-        <Skills />
-        <Journey />
-        <Experience />
-        <Writeups />
-        <Projects />
-        <Certifications />
-        <Research />
-        <Contact />
-      </main>
-      <StatusBar />
+      {/* #site is what break() splits in two. */}
+      <div id="site" className="flex flex-1 flex-col">
+        <Header />
+        <main className="frame-x mx-auto w-full max-w-[672px] flex-1 pt-14">
+          <Profile hasAvatar={inPublic(SITE.avatar)} />
+        </main>
+        <Footer />
+      </div>
+      <CommandPalette />
+      <BugHunter />
+      <BreakEffect />
     </>
   );
 }
