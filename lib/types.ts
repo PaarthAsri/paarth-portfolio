@@ -99,3 +99,29 @@ export interface ResearchArea {
   focus: string[];
   description: string;
 }
+
+export interface LogEntry {
+  timestamp: string;
+  level: "INFO" | "WARN" | "ERROR" | "DEBUG";
+  message: string;
+}
+
+export interface TerminalLine {
+  id: string;
+  type: "input" | "output" | "error" | "success" | "info" | "system";
+  content: string;
+}
+
+export type Mode = "normal" | "breach";
+
+export interface CommandResult {
+  lines: TerminalLine[];
+  navigate?: string;
+}
+
+export interface Command {
+  name: string;
+  description: string;
+  usage?: string;
+  execute: (args: string[]) => CommandResult;
+}
