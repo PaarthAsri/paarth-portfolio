@@ -8,6 +8,7 @@ export default function HuntButton({ hunting, caught }: { hunting: boolean; caug
       aria-pressed={hunting}
       title={hunting ? "Stop hunting (Esc)" : "Catch the bug"}
       data-bug-inspect="button.hunt"
+      data-hunt-toggle
       className={`flex h-8 items-center gap-2 whitespace-nowrap rounded-md border font-mono text-[11px] transition-all duration-300 ease-out ${
         hunting
           ? "border-accent/50 bg-accent-dim px-3 text-accent"

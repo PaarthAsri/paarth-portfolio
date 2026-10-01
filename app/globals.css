@@ -470,6 +470,23 @@ body {
   cursor: none !important;
 }
 
+/* On mobile the hunt takes over the screen: no scrolling, nothing tappable
+   except the hunt button, which stays live so you can leave the mode. */
+@media (pointer: coarse), (max-width: 767px) {
+  html[data-cursor-mode="swatter"],
+  html[data-cursor-mode="swatter"] body {
+    overflow: hidden;
+    overscroll-behavior: none;
+    touch-action: none;
+  }
+  html[data-cursor-mode="swatter"] body * {
+    pointer-events: none !important;
+  }
+  html[data-cursor-mode="swatter"] [data-hunt-toggle] {
+    pointer-events: auto !important;
+  }
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

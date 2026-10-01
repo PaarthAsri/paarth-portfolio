@@ -292,11 +292,23 @@ export default function BugHunter() {
   useEffect(() => {
     if (mode !== "swatter") return;
     const onDown = (e: PointerEvent) => {
+      // Tapping the hunt toggle is for leaving the mode, not swatting.
+      if ((e.target as Element | null)?.closest?.("[data-hunt-toggle]")) return;
+
+      // Touch never fires pointermove before a tap, so snap the swatter and the
+      // bug's fear point to the tap itself; otherwise the swatter stays stuck.
+      pointer.current = { x: e.clientX, y: e.clientY };
+      if (swatterRef.current) {
+        swatterRef.current.style.transform = `translate3d(${e.clientX - 8}px, ${e.clientY - 30}px, 0)`;
+      }
+
       setSwatting(true);
       timers.current.push(setTimeout(() => setSwatting(false), 110));
 
+      // Fingers are fatter than cursors, so give touch a bigger hit radius.
+      const radius = e.pointerType === "touch" ? 56 : 46;
       const s = sim.current;
-      if (s.hit || Math.hypot(e.clientX - s.x, e.clientY - s.y) > 46) return;
+      if (s.hit || Math.hypot(e.clientX - s.x, e.clientY - s.y) > radius) return;
 
       const result = TRIAGE[triageIndex.current++ % TRIAGE.length];
       s.hit = true;
@@ -329,8 +341,17 @@ export default function BugHunter() {
         setTimeout(() => setFeedback(null), 1700)
       );
     };
+    // iOS Safari ignores overflow:hidden for touch scrolling, so block it directly.
+    const lockQuery = window.matchMedia("(pointer: coarse), (max-width: 767px)");
+    const onTouchMove = (e: TouchEvent) => {
+      if (lockQuery.matches && !(e.target as Element | null)?.closest?.("[data-hunt-toggle]")) e.preventDefault();
+    };
     window.addEventListener("pointerdown", onDown);
-    return () => window.removeEventListener("pointerdown", onDown);
+    window.addEventListener("touchmove", onTouchMove, { passive: false });
+    return () => {
+      window.removeEventListener("pointerdown", onDown);
+      window.removeEventListener("touchmove", onTouchMove);
+    };
   }, [mode]);
 
   const r = inspect?.rect;
